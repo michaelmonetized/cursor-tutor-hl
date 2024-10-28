@@ -1,12 +1,7 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
-import { posthog } from 'posthog-js'
-
-posthog.init(process.env.NEXT_PUBLIC_POSTHOG_API_KEY!, {
-  api_host: process.env.NEXT_PUBLIC_POSTHOG_API_HOST,
-  person_profiles: 'always',
-});
+import { CSPostHogProvider } from './providers'
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -31,11 +26,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
+      <CSPostHogProvider>
+        <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         {children}
       </body>
+      </CSPostHogProvider>
     </html>
   );
 }
