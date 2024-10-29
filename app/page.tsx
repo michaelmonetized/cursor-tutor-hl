@@ -1,7 +1,19 @@
 import { Button } from "@/components/ui/button";
+import { Skeleton } from "@/components/ui/skeleton";
+import {
+  SignedIn,
+  SignedOut,
+  SignInButton,
+  SignOutButton,
+  UserButton,
+} from "@clerk/nextjs";
+import { currentUser } from "@clerk/nextjs/server";
+import { Authenticated } from "convex/react";
 import Link from "next/link";
+import { Suspense } from "react";
 
-export default function Home() {
+export default async function Home() {
+  const user = await currentUser();
   return (
     <>
       <h1 className="text-4xl font-bold">It works!</h1>
@@ -39,6 +51,24 @@ export default function Home() {
           <Button asChild>Watch Tutorial</Button>
         </Link>
       </h2>
+      <SignedOut>
+        <Suspense fallback={<Skeleton />}>
+          <SignInButton>
+            <Button asChild>Sign In</Button>
+          </SignInButton>
+        </Suspense>
+      </SignedOut>
+      <SignedIn>
+        <Suspense fallback={<Skeleton />}>
+          <UserButton />
+          <Authenticated>
+            <p>Authenticated in convex.</p>
+            <SignOutButton>
+              <Button asChild>Sign Out</Button>
+            </SignOutButton>
+          </Authenticated>
+        </Suspense>
+      </SignedIn>
     </>
   );
 }
