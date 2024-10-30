@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
+import UserHandle from "@/components/user-handle";
 import {
   SignedIn,
   SignedOut,
@@ -62,12 +63,14 @@ export default async function Home() {
         <Suspense fallback={<Skeleton />}>
           <UserButton />
           <Authenticated>
+            <h3>Welcome {user?.firstName}</h3>
             <p>Authenticated in convex.</p>
             <SignOutButton>
               <Button asChild>Sign Out</Button>
             </SignOutButton>
           </Authenticated>
         </Suspense>
+        <UserHandle />
       </SignedIn>
     </>
   );
