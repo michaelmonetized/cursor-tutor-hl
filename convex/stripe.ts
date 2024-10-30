@@ -13,8 +13,15 @@ type Metadata = {
 const apiVersion = "2024-09-30.acacia";
 
 export const pay = action({
-  args: {},
-  handler: async (ctx) => {
+  args: {
+    lineItems: v.array(
+      v.object({
+        price: v.string(), // priceId
+        quantity: v.number(), // defaults to 1 if not set
+      })
+    ),
+  },
+  handler: async (ctx, args) => {
     const user = await ctx.auth.getUserIdentity();
 
     if (!user) {
@@ -29,8 +36,15 @@ export const pay = action({
     const stripe = new Stripe(process.env.STRIPE_KEY!, {
       apiVersion,
     });
+
+    const defaultQuantity = 1;
+    const lineItems = args.lineItems.map((item) => ({
+      price: item.price,
+      quantity: item.quantity ?? defaultQuantity,
+    }));
+
     const session = await stripe.checkout.sessions.create({
-      line_items: [{ price: process.env.PRICE_ID!, quantity: 1 }],
+      line_items: lineItems,
       customer_email: user.email,
       metadata: {
         userId: user.subject,
@@ -51,7 +65,7 @@ export const fulfill = internalAction({
       apiVersion,
     });
 
-    const webhookSecret = process.env.STRIPE_WEBHOOKS_SECRET!;
+    const webhookSecret = process.env.STRIPE_CONVEX_WEBHOOK_SECRET!;
     try {
       const event = stripe.webhooks.constructEvent(
         args.payload,

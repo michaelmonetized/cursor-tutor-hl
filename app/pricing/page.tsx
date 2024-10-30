@@ -7,6 +7,8 @@ import {
 } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { api } from "@/convex/_generated/api";
+import { useAction } from "convex/react";
 
 const monthlyPackages = [
   {
@@ -43,6 +45,14 @@ const yearlyPackages = [
 ];
 
 export default function Pricing() {
+  const pay = useAction(api.stripe.pay);
+
+  const handlePay = async (priceId: string) => {
+    await pay({
+      lineItems: [{ price: priceId, quantity: 1 }],
+    });
+  };
+
   return (
     <div className="flex flex-col items-center justify-center h-screen">
       <h1 className="text-4xl font-bold">Pricing</h1>
@@ -61,7 +71,9 @@ export default function Pricing() {
                 <p>{pkg.description}</p>
               </CardContent>
               <CardFooter>
-                <Button>Subscribe</Button>
+                <Button onClick={() => handlePay(pkg.priceId)}>
+                  Subscribe
+                </Button>
               </CardFooter>
             </Card>
           ))}
@@ -76,7 +88,9 @@ export default function Pricing() {
                 <p>{pkg.description}</p>
               </CardContent>
               <CardFooter>
-                <Button>Subscribe</Button>
+                <Button onClick={() => handlePay(pkg.priceId)}>
+                  Subscribe
+                </Button>
               </CardFooter>
             </Card>
           ))}
