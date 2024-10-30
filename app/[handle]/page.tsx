@@ -8,13 +8,7 @@ import UserPicture from "@/components/user-picture";
 import { currentUser } from "@clerk/nextjs/server";
 import AddLink from "@/components/add-link";
 
-export default async function UserPage({
-  params,
-}: {
-  params: { handle: string };
-}) {
-  const handle = params.handle;
-
+export default async function UserPage({ handle }: { handle: string }) {
   const user = await preloadQuery(api.users.getUserByHandle, {
     handle: handle,
   });
