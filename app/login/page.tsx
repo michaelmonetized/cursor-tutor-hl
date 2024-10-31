@@ -1,11 +1,11 @@
-import { SignUp, SignedIn, SignedOut, SignOutButton } from "@clerk/nextjs";
+import { SignIn, SignedIn, SignedOut, SignOutButton } from "@clerk/nextjs";
 import Link from "next/link";
 
 export default function Register() {
   return (
     <>
       <SignedOut>
-        <SignUp />
+        <SignIn />
       </SignedOut>
       <SignedIn>
         <p className="text-center">
