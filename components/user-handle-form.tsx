@@ -12,7 +12,8 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "./ui/form";
+} from "@/components/ui/form";
+import { Button } from "@/components/ui/button";
 
 const formSchema = z.object({
   handle: z
@@ -54,6 +55,7 @@ export default function UserHandleForm({ handle }: { handle: string }) {
             </FormItem>
           )}
         />
+        <Button type="submit">Save</Button>
       </form>
     </Form>
   );
