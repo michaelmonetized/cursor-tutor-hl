@@ -6,6 +6,7 @@ import {
   SignedOut,
   SignInButton,
   SignOutButton,
+  SignUpButton,
   UserButton,
 } from "@clerk/nextjs";
 import { currentUser } from "@clerk/nextjs/server";
@@ -56,6 +57,9 @@ export default async function Home() {
           <SignInButton>
             <Button asChild>Sign In</Button>
           </SignInButton>
+          <SignUpButton>
+            <Button asChild>Sign Up</Button>
+          </SignUpButton>
         </Suspense>
       </SignedOut>
       <SignedIn>
