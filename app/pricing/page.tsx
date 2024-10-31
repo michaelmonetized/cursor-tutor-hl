@@ -63,7 +63,7 @@ export default function Pricing() {
           <TabsTrigger value="monthly">Monthly</TabsTrigger>
           <TabsTrigger value="yearly">Yearly</TabsTrigger>
         </TabsList>
-        <TabsContent value="monthly" className="flex flex-row gap-md">
+        <TabsContent value="monthly" className="flex flex-row gap-4">
           {monthlyPackages.map((pkg) => (
             <Card key={pkg.priceId} className="w-1/2">
               <CardHeader>
@@ -80,7 +80,7 @@ export default function Pricing() {
             </Card>
           ))}
         </TabsContent>
-        <TabsContent value="yearly" className="flex flex-row gap-md">
+        <TabsContent value="yearly" className="flex flex-row gap-4">
           {yearlyPackages.map((pkg) => (
             <Card key={pkg.priceId} className="w-1/2">
               <CardHeader>
