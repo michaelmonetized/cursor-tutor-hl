@@ -52,26 +52,26 @@ export default async function Home() {
           <Button asChild>Watch Tutorial</Button>
         </Link>
       </h2>
-      <SignedOut>
-        <Suspense fallback={<Skeleton />}>
+      <Suspense fallback={<Skeleton />}>
+        <SignedOut>
           <SignInButton>
             <Button asChild>Sign In</Button>
           </SignInButton>
           <SignUpButton>
             <Button asChild>Sign Up</Button>
           </SignUpButton>
-        </Suspense>
-      </SignedOut>
-      <SignedIn>
-        <Suspense fallback={<Skeleton />}>
+        </SignedOut>
+      </Suspense>
+      <Suspense fallback={<Skeleton />}>
+        <SignedIn>
           <UserButton />
           <h3>Welcome {user?.firstName}</h3>
           <SignOutButton>
             <Button asChild>Sign Out</Button>
           </SignOutButton>
-        </Suspense>
-        <UserHandle />
-      </SignedIn>
+        </SignedIn>
+      </Suspense>
+      <UserHandle />
     </>
   );
 }

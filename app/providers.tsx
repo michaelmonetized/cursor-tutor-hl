@@ -1,4 +1,5 @@
 "use client";
+
 import React from "react";
 import posthog from "posthog-js";
 import { ClerkProvider, useAuth } from "@clerk/nextjs";
