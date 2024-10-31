@@ -4,7 +4,7 @@ import { useForm } from "react-hook-form";
 import { api } from "@/convex/_generated/api";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Input } from "./ui/input";
+import { Input } from "@/components/ui/input";
 import {
   Form,
   FormControl,

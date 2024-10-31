@@ -154,6 +154,16 @@ export const createUser = internalMutation({
   },
 });
 
+export const createUserPublic = mutation({
+  args: { handle: v.optional(v.string()), userId: v.string() },
+  handler: async (ctx, args) => {
+    return await ctx.db.insert("users", {
+      userId: args.userId,
+      handle: args.handle,
+    });
+  },
+});
+
 export const setUniqueUserHandle = mutation({
   args: { handle: v.string() },
   handler: async (ctx, args) => {

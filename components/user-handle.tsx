@@ -1,7 +1,11 @@
 import { api } from "@/convex/_generated/api";
-import { preloadedQueryResult, preloadQuery } from "convex/nextjs";
+import {
+  preloadedQueryResult,
+  preloadQuery,
+  fetchMutation,
+} from "convex/nextjs";
 import { currentUser } from "@clerk/nextjs/server";
-import UserHandleForm from "./user-handle-form";
+import UserHandleForm from "@/components/user-handle-form";
 
 export default async function UserHandle() {
   const user = await currentUser();
@@ -17,8 +21,11 @@ export default async function UserHandle() {
   const userResult = preloadedQueryResult(preloadedUser);
 
   if (!userResult) {
-    return null;
+    await fetchMutation(api.users.createUserPublic, {
+      handle: "",
+      userId: user.id,
+    });
   }
 
-  return <UserHandleForm handle={userResult.handle ?? ""} />;
+  return <UserHandleForm handle={userResult?.handle ?? ""} />;
 }
