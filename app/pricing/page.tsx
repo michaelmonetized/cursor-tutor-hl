@@ -56,46 +56,54 @@ export default function Pricing() {
   };
 
   return (
-    <div className="flex flex-col">
+    <div className="flex flex-col w-full max-w-[1170px] mx-auto">
       <h1 className="text-4xl font-bold">Pricing</h1>
-      <Tabs defaultValue="yearly" className="w-[1170px] mx-auto">
+      <Tabs defaultValue="yearly">
         <TabsList className="text-4xl mx-auto">
           <TabsTrigger value="monthly">Monthly</TabsTrigger>
           <TabsTrigger value="yearly">Yearly</TabsTrigger>
         </TabsList>
-        <TabsContent value="monthly" className="flex flex-row gap-4">
-          {monthlyPackages.map((pkg) => (
-            <Card key={pkg.priceId} className="w-1/2">
-              <CardHeader>
-                <CardTitle>{pkg.name}</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p>{pkg.description}</p>
-              </CardContent>
-              <CardFooter>
-                <Button onClick={() => handlePay(pkg.priceId)}>
-                  Subscribe
-                </Button>
-              </CardFooter>
-            </Card>
-          ))}
+        <TabsContent value="monthly">
+          <div className="flex flex-row gap-4">
+            {monthlyPackages.map((pkg) => (
+              <div key={pkg.priceId} className="w-1/2">
+                <Card>
+                  <CardHeader>
+                    <CardTitle>{pkg.name}</CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <p>{pkg.description}</p>
+                  </CardContent>
+                  <CardFooter>
+                    <Button onClick={() => handlePay(pkg.priceId)}>
+                      Subscribe
+                    </Button>
+                  </CardFooter>
+                </Card>
+              </div>
+            ))}
+          </div>
         </TabsContent>
-        <TabsContent value="yearly" className="flex flex-row gap-4">
-          {yearlyPackages.map((pkg) => (
-            <Card key={pkg.priceId} className="w-1/2">
-              <CardHeader>
-                <CardTitle>{pkg.name}</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p>{pkg.description}</p>
-              </CardContent>
-              <CardFooter>
-                <Button onClick={() => handlePay(pkg.priceId)}>
-                  Subscribe
-                </Button>
-              </CardFooter>
-            </Card>
-          ))}
+        <TabsContent value="yearly">
+          <div className="flex flex-row gap-4">
+            {yearlyPackages.map((pkg) => (
+              <div key={pkg.priceId} className="w-1/2">
+                <Card>
+                  <CardHeader>
+                    <CardTitle>{pkg.name}</CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <p>{pkg.description}</p>
+                  </CardContent>
+                  <CardFooter>
+                    <Button onClick={() => handlePay(pkg.priceId)}>
+                      Subscribe
+                    </Button>
+                  </CardFooter>
+                </Card>
+              </div>
+            ))}
+          </div>
         </TabsContent>
       </Tabs>
     </div>
