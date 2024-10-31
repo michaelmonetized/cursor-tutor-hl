@@ -27,5 +27,10 @@ export default async function UserHandle() {
     });
   }
 
-  return <UserHandleForm handle={userResult?.handle ?? ""} />;
+  return (
+    <>
+      <h2>{userResult?.handle}</h2>
+      <UserHandleForm handle={userResult?.handle ?? ""} />
+    </>
+  );
 }

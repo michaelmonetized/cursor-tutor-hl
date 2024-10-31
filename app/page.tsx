@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
 import UserHandle from "@/components/user-handle";
+import UserLinks from "@/components/user-links";
 import {
   SignedIn,
   SignedOut,
@@ -72,6 +73,7 @@ export default async function Home() {
         </SignedIn>
       </Suspense>
       <UserHandle />
+      <UserLinks />
     </>
   );
 }
