@@ -70,10 +70,10 @@ export default async function Home() {
           <SignOutButton>
             <Button asChild>Sign Out</Button>
           </SignOutButton>
+          <UserHandle />
+          <UserLinks />
         </SignedIn>
       </Suspense>
-      <UserHandle />
-      <UserLinks />
     </>
   );
 }
