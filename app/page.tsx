@@ -9,7 +9,6 @@ import {
   UserButton,
 } from "@clerk/nextjs";
 import { currentUser } from "@clerk/nextjs/server";
-import { Authenticated } from "convex/react";
 import Link from "next/link";
 import { Suspense } from "react";
 
@@ -62,13 +61,10 @@ export default async function Home() {
       <SignedIn>
         <Suspense fallback={<Skeleton />}>
           <UserButton />
-          <Authenticated>
-            <h3>Welcome {user?.firstName}</h3>
-            <p>Authenticated in convex.</p>
-            <SignOutButton>
-              <Button asChild>Sign Out</Button>
-            </SignOutButton>
-          </Authenticated>
+          <h3>Welcome {user?.firstName}</h3>
+          <SignOutButton>
+            <Button asChild>Sign Out</Button>
+          </SignOutButton>
         </Suspense>
         <UserHandle />
       </SignedIn>
